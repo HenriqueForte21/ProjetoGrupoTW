@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website de Jogos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="bg-dark text-white py-3">
+        <div class="container">
+            <h1 class="text-center">Website de Jogos</h1>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Início</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <section id="filters" class="mb-4">
+            <h2>Filtros</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="genreFilter">Género:</label>
+                    <select id="genreFilter" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="Ação">Ação</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Plataforma">Plataforma</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="yearFilter">Ano:</label>
+                    <input type="number" id="yearFilter" class="form-control" placeholder="Ex: 2020">
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button id="applyFilter" class="btn btn-primary">Aplicar Filtro</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalog">
+            <h2>Catálogo de Jogos</h2>
+            <div id="gamesList" class="row">
+                <!-- Jogos serão inseridos aqui via JS -->
+            </div>
+        </section>
+
+        <!-- Modal de Login -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Utilizador</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Palavra-passe</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Detalhe do Jogo -->
+        <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="gameModalLabel">Detalhes do Jogo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="gameDetails"></div>
+                        <hr>
+                        <h6>Avaliar</h6>
+                        <select id="rating" class="form-select mb-3">
+                            <option value="1">1 Estrela</option>
+                            <option value="2">2 Estrelas</option>
+                            <option value="3">3 Estrelas</option>
+                            <option value="4">4 Estrelas</option>
+                            <option value="5">5 Estrelas</option>
+                        </select>
+                        <h6>Comentar</h6>
+                        <textarea id="comment" class="form-control mb-3" rows="3"></textarea>
+                        <button id="submitReview" class="btn btn-primary">Submeter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área para Admin adicionar jogo (visível só após login) -->
+        <section id="adminSection" class="mt-5" style="display: none;">
+            <h2>Adicionar Novo Jogo (Admin)</h2>
+            <form id="addGameForm">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Título</label>
+                    <input type="text" class="form-control" id="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="genre" class="form-label">Género</label>
+                    <input type="text" class="form-control" id="genre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="year" class="form-label">Ano</label>
+                    <input type="number" class="form-control" id="year" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="description" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Adicionar Jogo</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-3">
+        <div class="container text-center">
+            <p>&copy; 2026 Website de Jogos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
